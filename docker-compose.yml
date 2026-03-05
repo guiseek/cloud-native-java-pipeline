@@ -1,0 +1,65 @@
+services:
+  postgres:
+    image: postgres:17.9-alpine
+    container_name: pagadoria-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks:
+      - pagadoria-net
+
+  keycloak:
+    image: keycloak/keycloak:26.5.5
+    container_name: pagadoria-keycloak
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # Admin inicial
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+
+      # Banco (Postgres)
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak
+
+      # Ajustes úteis para dev/local
+      KC_HEALTH_ENABLED: "true"
+      KC_METRICS_ENABLED: "true"
+      KC_LOG_LEVEL: INFO
+      KC_HOSTNAME_STRICT: "false"
+      KC_HTTP_ENABLED: "true"
+
+    # Import automático de realm (opcional).
+    # Se você colocar um JSON em ./keycloak/realm, o Keycloak importa ao subir.
+    volumes:
+      - ./keycloak/realm:/opt/keycloak/data/import:ro
+
+    command:
+      - start-dev
+      - --import-realm
+
+    ports:
+      - "9080:8080"
+    networks:
+      - pagadoria-net
+
+volumes:
+  pgdata:
+
+networks:
+  pagadoria-net:
+    driver: bridge
