@@ -122,6 +122,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate.orm</groupId>
+			<artifactId>hibernate-envers</artifactId>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -179,6 +186,9 @@
 						<configuration>
 							<excludes>
 								<exclude>**/*Application.class</exclude>
+								<exclude>**/Entidade.class</exclude>
+								<exclude>**/MRevisionEntity.class</exclude>
+								<exclude>**/MRevisionEntityListener.class</exclude>
 								<exclude>**/config/**</exclude>
 								<exclude>**/dto/**</exclude>
 								<exclude>**/entity/**</exclude>

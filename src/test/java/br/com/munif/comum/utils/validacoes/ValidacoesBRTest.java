@@ -1,4 +1,4 @@
-package br.com.munif.pagadoria.utils;
+package br.com.munif.comum.utils.validacoes;
 
 import org.junit.jupiter.api.Test;
 
