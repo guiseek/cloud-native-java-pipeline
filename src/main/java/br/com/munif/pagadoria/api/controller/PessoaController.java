@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/pessoas")
+@RequestMapping("/api/v0/pessoas")
 public class PessoaController extends SuperController<PessoaResumoDTO, PessoaResponseDTO, PessoaCreateDTO, PessoaUpdateDTO, Pessoa> {
 
     private final PessoaService service;
