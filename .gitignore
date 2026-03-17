@@ -1,10 +1,31 @@
+########################################
+# Projeto Pagadoria
+# Backend: Java / Spring Boot / Maven
+# Frontend: Angular / Node.js
+########################################
+
+########################################
+# Arquivos gerais
+########################################
 HELP.md
+
+########################################
+# Backend - Maven / Java / Spring Boot
+########################################
+
+# Saída de build do Maven
 target/
-.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### STS ###
+# Maven Wrapper
+.mvn/wrapper/maven-wrapper.jar
+
+########################################
+# Backend - IDEs e ferramentas Java
+########################################
+
+# Spring Tool Suite (STS)
 .apt_generated
 .classpath
 .factorypath
@@ -13,13 +34,14 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-.idea
+# IntelliJ IDEA
+.idea/
 *.iws
 *.iml
 *.ipr
+out/
 
-### NetBeans ###
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
@@ -29,5 +51,53 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
+########################################
+# Frontend - Angular / Node.js
+########################################
+
+# Dependências
+frontend/node_modules/
+
+# Cache e artefatos do Angular
+frontend/.angular/
+frontend/dist/
+frontend/coverage/
+frontend/.sass-cache/
+
+# Logs de gerenciadores de pacote
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+########################################
+# Build gerado do frontend dentro do Spring Boot
+########################################
+
+# O Angular gera arquivos em src/main/resources/static/app
+# Esses artefatos são gerados no build e não devem ser versionados
+src/main/resources/static/app/
+
+########################################
+# Editor
+########################################
+
+# Visual Studio Code
 .vscode/
+
+########################################
+# Logs e arquivos temporários
+########################################
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+########################################
+# Sistema operacional
+########################################
+.DS_Store
+Thumbs.db
+
