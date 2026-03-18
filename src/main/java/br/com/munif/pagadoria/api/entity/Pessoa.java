@@ -4,11 +4,18 @@ import br.com.munif.comum.persistencia.Entidade;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 @Entity
 @Audited
 @Table(name = "pessoa")
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class Pessoa extends Entidade {
 
     @Column(name = "nome", nullable = false, length = 150)
@@ -17,19 +24,32 @@ public class Pessoa extends Entidade {
     @Column(name = "cpf_cnpj", nullable = false, length = 14, unique = true)
     private String cpfCnpj;
 
-    public String getNome() {
-        return nome;
-    }
+    @Column(name = "telefone_principal", length = 20)
+    private String telefonePrincipal;
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    @Column(name = "telefone_secundario", length = 20)
+    private String telefoneSecundario;
 
-    public String getCpfCnpj() {
-        return cpfCnpj;
-    }
+    @Column(name = "email", length = 150)
+    private String email;
 
-    public void setCpfCnpj(String cpfCnpj) {
-        this.cpfCnpj = cpfCnpj;
-    }
+    @Column(name = "cep", length = 8)
+    private String cep;
+
+    @Column(name = "endereco", length = 200)
+    private String endereco;
+
+    @Column(name = "complemento", length = 100)
+    private String complemento;
+
+    @Column(name = "bairro", length = 100)
+    private String bairro;
+
+    @Column(name = "cidade", length = 100)
+    private String cidade;
+
+    @Column(name = "uf", length = 2)
+    private String uf;
+
+
 }
