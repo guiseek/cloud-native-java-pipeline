@@ -1,0 +1,71 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.dashboard-page {
+  padding: 24px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.topbar h1 {
+  margin: 0;
+  color: #0f172a;
+}
+
+.topbar p {
+  margin: 4px 0 0;
+  color: #64748b;
+}
+
+.logout {
+  height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 10px;
+  background: #0f172a;
+  color: white;
+  cursor: pointer;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 320px));
+  gap: 16px;
+}
+
+.card,
+.state-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.value {
+  font-size: 42px;
+  color: #0f172a;
+}
+
+.error {
+  color: #991b1b;
+  background: #fee2e2;
+}

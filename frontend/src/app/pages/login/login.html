@@ -1,0 +1,51 @@
+<div class="login-page">
+  <div class="login-card">
+    <div class="brand">
+      <h1>Pagadoria</h1>
+      <p>Sistema de administração de comissões imobiliárias</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="login-form">
+      <div class="field">
+        <label for="username">Usuário</label>
+        <input
+          id="username"
+          type="text"
+          formControlName="username"
+          placeholder="Informe seu usuário"
+        />
+        @if (form.controls.username.touched && form.controls.username.invalid) {
+          <small class="error">O usuário é obrigatório.</small>
+        }
+      </div>
+
+      <div class="field">
+        <label for="password">Senha</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Informe sua senha"
+        />
+        @if (form.controls.password.touched && form.controls.password.invalid) {
+          <small class="error">A senha é obrigatória.</small>
+        }
+      </div>
+
+      @if (errorMessage) {
+        <div class="server-error">
+          {{ errorMessage }}
+        </div>
+      }
+
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Entrando...' : 'Entrar' }}
+      </button>
+    </form>
+
+    <div class="hint">
+      <strong>Usuário de teste:</strong> pagadoria_admin<br />
+      <strong>Senha:</strong> admin123
+    </div>
+  </div>
+</div>

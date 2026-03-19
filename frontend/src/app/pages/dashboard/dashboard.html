@@ -1,0 +1,28 @@
+<div class="dashboard-page">
+  <header class="topbar">
+    <div>
+      <h1>Pagadoria</h1>
+      <p>Dashboard inicial</p>
+    </div>
+
+    <button class="logout" (click)="logout()">Sair</button>
+  </header>
+
+  @if (loading) {
+    <div class="state-card">
+      Carregando informações...
+    </div>
+  } @else if (errorMessage) {
+    <div class="state-card error">
+      {{ errorMessage }}
+    </div>
+  } @else {
+    <section class="cards">
+      <article class="card">
+        <span class="label">Pessoas cadastradas</span>
+        <strong class="value">{{ resumo?.quantidadePessoas }}</strong>
+      </article>
+    </section>
+  }
+</div>
+
