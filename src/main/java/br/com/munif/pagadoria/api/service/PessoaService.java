@@ -64,4 +64,10 @@ public class PessoaService extends SuperService<Pessoa, PessoaRepository> {
     public List<RevisaoDTO<Pessoa>> listarRevisoes(UUID id) {
         return listarVersoesAnteriores(id);
     }
+
+    public long contarPessoasAtivas() {
+        return repository.countByAtivoTrue();
+    }
+
+
 }

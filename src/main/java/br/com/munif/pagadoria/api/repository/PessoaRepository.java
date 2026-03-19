@@ -12,4 +12,8 @@ public interface PessoaRepository extends SuperRepository<Pessoa> {
 
     List<Pessoa> findByAtivoTrueAndNomeContainingIgnoreCase(String nome);
 
+    long countByAtivoTrue();
+
+
+
 }
