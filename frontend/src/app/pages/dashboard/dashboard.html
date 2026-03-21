@@ -5,7 +5,10 @@
       <p>Dashboard inicial</p>
     </div>
 
-    <button class="logout" (click)="logout()">Sair</button>
+    <div class="topbar-actions">
+      <button type="button" (click)="irParaPessoas()">Pessoas</button>
+      <button class="logout" type="button" (click)="logout()">Sair</button>
+    </div>
   </header>
 
   @if (loading) {
@@ -24,11 +27,4 @@
       </article>
     </section>
   }
-
-
-
-</div>
-
-<div>
-  <pre>{{ resumo | json }}</pre>
 </div>
