@@ -1,0 +1,21 @@
+.dashboard-page h1 {
+  margin: 0;
+  color: #111827;
+}
+
+.subtitle {
+  margin: 8px 0 24px;
+  color: #6b7280;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}

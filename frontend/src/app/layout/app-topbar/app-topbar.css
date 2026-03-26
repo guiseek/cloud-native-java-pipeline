@@ -1,0 +1,19 @@
+.topbar {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.subtitle {
+  margin-top: 2px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}

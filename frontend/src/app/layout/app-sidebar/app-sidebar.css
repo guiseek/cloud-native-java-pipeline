@@ -1,0 +1,48 @@
+.sidebar {
+  height: 100%;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.brand {
+  padding: 8px 12px 20px 12px;
+  border-bottom: 1px solid #eef1f4;
+}
+
+.brand-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.brand-subtitle {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #374151;
+  padding: 12px 14px;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+.menu a:hover {
+  background: #f3f4f6;
+}
+
+.menu a.active {
+  background: #eef2ff;
+  color: #1d4ed8;
+  font-weight: 600;
+}

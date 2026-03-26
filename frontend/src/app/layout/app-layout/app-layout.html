@@ -1,1 +1,15 @@
-<p>app-layout works!</p>
+<div class="layout-shell">
+  <aside class="layout-sidebar">
+    <app-app-sidebar />
+  </aside>
+
+  <div class="layout-main">
+    <header class="layout-topbar">
+      <app-app-topbar />
+    </header>
+
+    <main class="layout-content">
+      <router-outlet />
+    </main>
+  </div>
+</div>

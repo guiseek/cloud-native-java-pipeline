@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-app-sidebar',
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './app-sidebar.html',
   styleUrl: './app-sidebar.css',
 })
-export class AppSidebar {}
+export class AppSidebarComponent {
+}
