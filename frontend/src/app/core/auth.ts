@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
-const ACCESS_TOKEN_KEY = 'pagadoria_access_token';
-const REFRESH_TOKEN_KEY = 'pagadoria_refresh_token';
+const ACCESS_TOKEN_KEY = 'stella_access_token';
+const REFRESH_TOKEN_KEY = 'stella_refresh_token';
 
 interface LoginResponse {
   accessToken: string;

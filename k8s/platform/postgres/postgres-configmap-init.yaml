@@ -5,14 +5,14 @@ metadata:
   namespace: platform
 data:
   init.sql: |
-    SELECT 'CREATE DATABASE pagadoria_dev'
-    WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'pagadoria_dev')\gexec
+    SELECT 'CREATE DATABASE stella_dev'
+    WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'stella_dev')\gexec
 
-    SELECT 'CREATE DATABASE pagadoria_staging'
-    WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'pagadoria_staging')\gexec
+    SELECT 'CREATE DATABASE stella_staging'
+    WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'stella_staging')\gexec
 
-    SELECT 'CREATE DATABASE pagadoria_prod'
-    WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'pagadoria_prod')\gexec
+    SELECT 'CREATE DATABASE stella_prod'
+    WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'stella_prod')\gexec
   
   
 

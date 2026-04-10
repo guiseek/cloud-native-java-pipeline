@@ -1,6 +1,6 @@
-# Pagadoria
+# Stella
 
-Sistema de administração de comissões imobiliárias com autenticação OAuth2, API REST e frontend SPA.
+Sistema de administração Inventário Pessoal com autenticação OAuth2, API REST e frontend SPA.
 
 Autor: Munif Gebara Junior
 
@@ -8,7 +8,7 @@ Autor: Munif Gebara Junior
 
 ## 1. Visão geral
 
-O projeto Pagadoria é um sistema completo composto por:
+O projeto Stella é um sistema completo composto por:
 
 - Backend Java com Spring Boot
 - Frontend Angular (SPA)
@@ -21,11 +21,11 @@ O projeto Pagadoria é um sistema completo composto por:
 O objetivo é permitir o gerenciamento de:
 
 - Pessoas
-- Transações
-- Participações
-- Parcelas
-- Antecipações
-- Relatórios
+- Coisas
+- Categorias
+- Empréstimos
+- Entradas
+- Saídas
 - Controle de permissões por role
 
 ---
@@ -69,7 +69,7 @@ O Spring Boot serve o frontend automaticamente.
 ## 3. Estrutura do projeto
 
 
-pagadoria/
+stella/
 
 frontend/
 src/main/java/
@@ -180,19 +180,19 @@ Porta:
 Banco principal:
 
 
-pagadoria
+stella
 
 
 Usuário:
 
 
-pagadoria
+stella
 
 
 Senha:
 
 
-pagadoria
+stella
 
 
 Banco do Keycloak:
@@ -233,13 +233,13 @@ admin
 Realm:
 
 
-pagadoria
+stella
 
 
 Roles:
 
 
-ADMIN_PAGADORIA
+ADMIN_STELLA
 CONTRATANTE
 PAGADOR
 FAVORECIDO
@@ -249,7 +249,7 @@ Usuários:
 
 | usuário | senha | role |
 |---------|--------|--------|
-| pagadoria_admin | admin123 | ADMIN_PAGADORIA |
+| stella_admin | admin123 | ADMIN_STELLA |
 | contratante1 | demo123 | CONTRATANTE |
 | pagador1 | demo123 | PAGADOR |
 | favorecido1 | demo123 | FAVORECIDO |
@@ -257,14 +257,14 @@ Usuários:
 Client API:
 
 
-pagadoria-api
+stella-api
 bearer-only
 
 
 Client CLI:
 
 
-pagadoria-cli
+stella-cli
 public
 direct access grants enabled
 
@@ -275,10 +275,10 @@ direct access grants enabled
 
 
 curl -X POST
-http://127.0.0.1:9080/realms/pagadoria/protocol/openid-connect/token
+http://127.0.0.1:9080/realms/stella/protocol/openid-connect/token
 
--d "client_id=pagadoria-cli"
--d "username=pagadoria_admin"
+-d "client_id=stella-cli"
+-d "username=stella_admin"
 -d "password=admin123"
 -d "grant_type=password"
 
@@ -311,7 +311,7 @@ mvn clean package
 
 Jar gerado em:
 
-target/pagadoria.jar
+target/stella.jar
 
 
 application.yml
@@ -322,9 +322,9 @@ port: 8080
 spring:
 
 datasource:
-url: jdbc:postgresql://127.0.0.1:5432/pagadoria
-username: pagadoria
-password: pagadoria
+url: jdbc:postgresql://127.0.0.1:5432/stella
+username: stella
+password: stella
 
 jpa:
 hibernate:
@@ -334,7 +334,7 @@ security:
 oauth2:
 resourceserver:
 jwt:
-issuer-uri: http://127.0.0.1:9080/realms/pagadoria
+issuer-uri: http://127.0.0.1:9080/realms/stella
 
 
 --------------------------------------------
@@ -768,7 +768,7 @@ mvn clean package
 
 3. rodar jar
 
-java -jar target/pagadoria.jar
+java -jar target/stella.jar
 
 
 abrir
@@ -919,11 +919,11 @@ Sempre limpar build Angular
 
 ## 33. Autor
 
-Munif Gebara Junior
+Munif Gebara Junior (munifgebara@gmail.com)
 
-Projeto Pagadoria
+Projeto Stella
 
-Sistema de administração de comissões imobiliárias
+Sistema de Inventário Pessoal
 
 
 

@@ -1,7 +1,7 @@
 -- DB do seu sistema
-CREATE USER pagadoria WITH PASSWORD 'pagadoria';
-CREATE DATABASE pagadoria OWNER pagadoria;
-GRANT ALL PRIVILEGES ON DATABASE pagadoria TO pagadoria;
+CREATE USER stella WITH PASSWORD 'stella';
+CREATE DATABASE stella OWNER stella;
+GRANT ALL PRIVILEGES ON DATABASE stella TO stella;
 
 -- DB do Keycloak
 CREATE USER keycloak WITH PASSWORD 'keycloak';

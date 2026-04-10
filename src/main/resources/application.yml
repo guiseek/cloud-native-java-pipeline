@@ -3,12 +3,12 @@ server:
 
 spring:
   application:
-    name: pagadoria-api
+    name: stella-api
 
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/pagadoria
-    username: pagadoria
-    password: pagadoria
+    url: jdbc:postgresql://127.0.0.1:5432/stella
+    username: stella
+    password: stella
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -32,17 +32,17 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${pagadoria.keycloak.base-url}/realms/${pagadoria.keycloak.realm}
+          issuer-uri: ${stella.keycloak.base-url}/realms/${stella.keycloak.realm}
 
-pagadoria:
+stella:
   cors:
     allowed-origins:
-      - ${PAGADORIA_CORS_ALLOWED_ORIGIN_1:http://127.0.0.1:4200}
-      - ${PAGADORIA_CORS_ALLOWED_ORIGIN_2:http://localhost:4200}
+      - ${STELLA_CORS_ALLOWED_ORIGIN_1:http://127.0.0.1:4200}
+      - ${STELLA_CORS_ALLOWED_ORIGIN_2:http://localhost:4200}
   keycloak:
-    base-url: ${PAGADORIA_KEYCLOAK_BASE_URL:http://127.0.0.1:9080}
-    realm: ${PAGADORIA_KEYCLOAK_REALM:pagadoria}
-    public-client-id: ${PAGADORIA_KEYCLOAK_PUBLIC_CLIENT_ID:pagadoria-cli}
+    base-url: ${STELLA_KEYCLOAK_BASE_URL:http://127.0.0.1:9080}
+    realm: ${STELLA_KEYCLOAK_REALM:stella}
+    public-client-id: ${STELLA_KEYCLOAK_PUBLIC_CLIENT_ID:stella-cli}
 
 management:
   endpoints:
