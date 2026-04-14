@@ -28,6 +28,9 @@
 	</scm>
 	<properties>
 		<java.version>25</java.version>
+		<maven.build.timestamp.format>dd 'de' MMMM 'de' yyyy 'às' HH:mm</maven.build.timestamp.format>
+		<build.timestamp>${maven.build.timestamp}</build.timestamp>
+		<git.commit>local</git.commit>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -283,9 +286,13 @@
 					</execution>
 				</executions>
 			</plugin>
-
-
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 	</build>
 
 </project>

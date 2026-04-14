@@ -10,7 +10,9 @@ RUN chmod +x mvnw
 COPY frontend frontend
 COPY src src
 
-RUN ./mvnw -DskipTests clean package
+ARG GIT_COMMIT=local
+
+RUN ./mvnw -DskipTests clean package  -Dgit.commit=${GIT_COMMIT}
 
 FROM eclipse-temurin:25-jre-alpine
 
