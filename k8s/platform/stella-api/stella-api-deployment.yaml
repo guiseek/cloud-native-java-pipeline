@@ -45,4 +45,3 @@ spec:
             initialDelaySeconds: 40
             periodSeconds: 15
             timeoutSeconds: 5
-
