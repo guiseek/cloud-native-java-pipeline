@@ -34,7 +34,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(EndpointRequest.to("health", "info")).permitAll()
+                        .requestMatchers("/actuator/health", "/actuator/prometheus", "/actuator/metrics", "/actuator/metrics/**").permitAll()
+                        .requestMatchers(EndpointRequest.to("health", "info", "metrics", "prometheus")).permitAll()
                         .requestMatchers(
                                 "/",
                                 "/index.html",
