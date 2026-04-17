@@ -10,4 +10,5 @@ import { AppTopbarComponent } from '../app-topbar/app-topbar';
   styleUrl: './app-layout.css',
 })
 export class AppLayoutComponent {
+  readonly currentYear = new Date().getFullYear();
 }

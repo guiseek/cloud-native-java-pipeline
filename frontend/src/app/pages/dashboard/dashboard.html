@@ -13,9 +13,12 @@
   } @else {
     <div class="cards">
       <p-card header="Pessoas cadastradas">
-        <div class="metric-value">
-          {{ resumo()?.quantidadePessoas ?? 0 }}
-        </div>
+        <a class="metric-link" routerLink="/pessoas" aria-label="Ir para a listagem de pessoas">
+          <div class="metric-value">
+            {{ resumo()?.quantidadePessoas ?? 0 }}
+          </div>
+          <span class="metric-caption">Abrir cadastro e listagem de pessoas</span>
+        </a>
       </p-card>
     </div>
   }
