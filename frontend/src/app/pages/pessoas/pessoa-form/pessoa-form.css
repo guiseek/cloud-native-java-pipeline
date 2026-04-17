@@ -24,6 +24,10 @@
   color: #b91c1c;
 }
 
+.field-hint {
+  color: #0f766e;
+}
+
 .message.error {
   grid-column: 1 / -1;
   padding: 0.75rem 1rem;

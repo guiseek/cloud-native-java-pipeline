@@ -59,6 +59,10 @@
           <input id="cep" pInputText formControlName="cep" />
           @if (campoInvalido('cep')) {
             <small class="field-error">CEP deve ter 8 dígitos.</small>
+          } @else if (buscandoCep()) {
+            <small class="field-hint">Buscando endereço pelo CEP...</small>
+          } @else if (cepMessage()) {
+            <small class="field-hint">{{ cepMessage() }}</small>
           }
         </div>
 
@@ -106,4 +110,3 @@
     }
   </ng-template>
 </p-card>
-
