@@ -1,9 +1,12 @@
-import { Component, OnInit, computed, inject, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, computed, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { catchError, debounceTime, distinctUntilChanged, filter, map, of, switchMap, tap } from 'rxjs';
+import { CepService } from '../../../core/cep/cep';
 import { PessoaService } from '../../../core/pessoa/pessoa';
 import {
   somenteDigitos,
@@ -43,14 +46,19 @@ function cepValidator(control: AbstractControl): ValidationErrors | null {
 })
 export class PessoaFormComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
+  private readonly destroyRef = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly cepService = inject(CepService);
   private readonly pessoaService = inject(PessoaService);
 
   id = signal<string | null>(null);
   loading = signal(false);
   salvando = signal(false);
   errorMessage = signal('');
+  cepMessage = signal('');
+  buscandoCep = signal(false);
+  private ultimoCepConsultado: string | null = null;
 
   readonly edicao = computed(() => !!this.id());
 
@@ -69,6 +77,8 @@ export class PessoaFormComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.observarCep();
+
     const id = this.route.snapshot.paramMap.get('id');
 
     if (!id) {
@@ -80,19 +90,24 @@ export class PessoaFormComponent implements OnInit {
 
     this.pessoaService.buscarPorId(id).subscribe({
       next: (pessoa) => {
-        this.form.patchValue({
-          nome: pessoa.nome ?? '',
-          cpfCnpj: pessoa.cpfCnpj ?? '',
-          telefonePrincipal: pessoa.telefonePrincipal ?? '',
-          telefoneSecundario: pessoa.telefoneSecundario ?? '',
-          email: pessoa.email ?? '',
-          cep: pessoa.cep ?? '',
-          endereco: pessoa.endereco ?? '',
-          complemento: pessoa.complemento ?? '',
-          bairro: pessoa.bairro ?? '',
-          cidade: pessoa.cidade ?? '',
-          uf: pessoa.uf ?? '',
-        });
+        this.form.patchValue(
+          {
+            nome: pessoa.nome ?? '',
+            cpfCnpj: pessoa.cpfCnpj ?? '',
+            telefonePrincipal: pessoa.telefonePrincipal ?? '',
+            telefoneSecundario: pessoa.telefoneSecundario ?? '',
+            email: pessoa.email ?? '',
+            cep: pessoa.cep ?? '',
+            endereco: pessoa.endereco ?? '',
+            complemento: pessoa.complemento ?? '',
+            bairro: pessoa.bairro ?? '',
+            cidade: pessoa.cidade ?? '',
+            uf: pessoa.uf ?? '',
+          },
+          { emitEvent: false },
+        );
+
+        this.ultimoCepConsultado = somenteDigitos(pessoa.cep);
 
         this.form.controls.cpfCnpj.disable();
         this.loading.set(false);
@@ -174,6 +189,63 @@ export class PessoaFormComponent implements OnInit {
   campoInvalido(nome: keyof typeof this.form.controls): boolean {
     const campo = this.form.controls[nome];
     return !!campo && campo.invalid && (campo.touched || campo.dirty);
+  }
+
+  private observarCep(): void {
+    this.form.controls.cep.valueChanges
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged(),
+        tap((valor) => {
+          const cep = somenteDigitos(valor);
+
+          if (cep !== this.ultimoCepConsultado) {
+            this.cepMessage.set('');
+          }
+
+          if (!cep) {
+            this.buscandoCep.set(false);
+            this.ultimoCepConsultado = null;
+          }
+        }),
+        filter((valor) => validarCep(valor)),
+        map((valor) => somenteDigitos(valor)),
+        filter((cep) => cep !== this.ultimoCepConsultado),
+        tap(() => {
+          this.buscandoCep.set(true);
+          this.cepMessage.set('');
+        }),
+        switchMap((cep) =>
+          this.cepService.buscarEndereco(cep).pipe(
+            catchError(() => of('erro' as const)),
+            map((resultado) => ({ cep, resultado })),
+          ),
+        ),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe(({ cep, resultado }) => {
+        this.buscandoCep.set(false);
+        this.ultimoCepConsultado = cep;
+
+        if (resultado === 'erro') {
+          this.cepMessage.set('Nao foi possivel consultar o CEP agora. Voce pode preencher o endereco manualmente.');
+          return;
+        }
+
+        if (!resultado) {
+          this.cepMessage.set('CEP nao encontrado. Confira o valor informado ou preencha o endereco manualmente.');
+          return;
+        }
+
+        this.form.patchValue({
+          endereco: resultado.endereco,
+          bairro: resultado.bairro,
+          cidade: resultado.cidade,
+          uf: resultado.uf,
+        });
+
+        this.cepMessage.set('Endereco preenchido automaticamente a partir do CEP.');
+      });
   }
 
   private nullIfBlank(value: string | null | undefined): string | null {
