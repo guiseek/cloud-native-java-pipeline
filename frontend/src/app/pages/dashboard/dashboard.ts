@@ -1,10 +1,11 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { DashboardResumo, DashboardService } from '../../core/dashboard';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CardModule],
+  imports: [CardModule, RouterLink],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })

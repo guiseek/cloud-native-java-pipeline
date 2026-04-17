@@ -4,23 +4,24 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  color: #e8f3ef;
 }
 
 .brand {
   padding: 8px 12px 20px 12px;
-  border-bottom: 1px solid #eef1f4;
+  border-bottom: 1px solid rgba(232, 243, 239, 0.16);
 }
 
 .brand-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #111827;
+  color: #f8fafc;
 }
 
 .brand-subtitle {
   margin-top: 4px;
   font-size: 0.9rem;
-  color: #6b7280;
+  color: rgba(232, 243, 239, 0.72);
 }
 
 .menu {
@@ -31,21 +32,23 @@
 
 .menu a {
   text-decoration: none;
-  color: #374151;
+  color: rgba(248, 250, 252, 0.88);
   padding: 12px 14px;
   border-radius: 10px;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
 .menu a:hover {
-  background: #f3f4f6;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transform: translateX(2px);
 }
 
 .menu a.active {
-  background: #eef2ff;
-  color: #1d4ed8;
+  background: rgba(245, 158, 11, 0.16);
+  color: #fbbf24;
   font-weight: 600;
 }
